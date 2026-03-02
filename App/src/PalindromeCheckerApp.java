@@ -1,28 +1,32 @@
+import java.util.Scanner;
+
 /**
  * ======================================
  * MAIN CLASS - UseCasePalindromeApp
  * ======================================
  *
- * Use Case 1: Apllication Entry & Welcome Message
+ * Use Case 2: Hardcoded Palindrome Validation
  *
  * Description:
- * This class represents the entry point of the
- * Palindrome Checker Management System.
+ * This class demonstarts basic palindrome validation
+ * using a hardcoded string value.
  *
  * At this stage, the application:
- * - Starts execution from the main() method
- * - Displays a welcome message
- * - Shows application version
+ * - Stores a predefined string
+ * - Compares characters from both the ends
+ * - Determines whether the string is a palindrome
+ * - Displays the result on the console
  *
- * No palindrome logic is implemented yet.
+ * This use case introduces fundamental comparison logic
+ * before using advanced data structures.
  *
  * @lak-is-law Developer
- * @version 1.0
+ * @version 2.0
  */
 
 public class PalindromeCheckerApp {
     /**
-     * Application entry point.
+     * Application entry point for UC2.
      *
      * This is the first method executed by the JVM
      * when program starts.
@@ -30,6 +34,18 @@ public class PalindromeCheckerApp {
      * @param args Command-line arguements
      */
     public static void main(String[] args){
-        System.out.println("Welcome to the Palindrome Checker Management System \n Version 1.0 \n System intialized successfully. /");
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Input text: ");
+        String input = sc.nextLine();
+
+        boolean isPalindrome = true;
+        for (int i = 0; i < input.length() / 2; i++) {
+            if (input.charAt(i) != input.charAt(input.length() - 1 - i)) {
+                isPalindrome = false;
+                break;
+            }
+        }
+        System.out.println("Is it a palindrome? "+isPalindrome);
+        sc.close();
     }
 }
