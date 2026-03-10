@@ -6,26 +6,26 @@ import java.util.*;
  * MAIN CLASS - UseCasePalindromeApp
  * ======================================
  *
- * Use Case UC12: Strategy Pattern for Palindrome Algorithms (Advanced)
+ * Use Case UC13: Performance Comparison
  * Description:
  * This class checks validates a palindrome by using a queue and stack
  *
  * At this stage, the application:
- * Define PalindromeStrategy interface
- * Implement StackStrategy, DequeStrategy
- * Inject strategy at runtime
+ * Run multiple algorithms
+ * Capture execution time
+ * Display results
  *
  * This use case introduces fundamental comparison logic
  * before using advanced data structures and reduces extra memory usage.
  *
  * @lak-is-law Developer
- * @version 12.0
+ * @version 13.0
  */
 
 public class PalindromeCheckerApp {
 
     /**
-     * Application entry point for UC12.
+     * Application entry point for UC13.
      *
      * This is the first method executed by the JVM
      * when program starts.
@@ -38,25 +38,30 @@ public class PalindromeCheckerApp {
         System.out.print("Input : ");
         String input = sc.nextLine();
 
-        // 1. Create a stack to store characters
-        Stack<Character> stack = new Stack<>();
+        // Capture start time in nanoseconds
+        long startTime = System.nanoTime();
 
-        // 2. Push each character of the input onto the stack
-        for (char c : input.toCharArray()) {
-            stack.push(c);
-        }
-
-        // 3. Compare characters by popping from the stack
+        // Palindrome Logic (Two-pointer approach)
         boolean isPalindrome = true;
-        for (char c : input.toCharArray()) {
-            // Popping gives characters in reverse order
-            if (c != stack.pop()) {
+        int start = 0;
+        int end = input.length() - 1;
+
+        while (start < end) {
+            if (input.charAt(start) != input.charAt(end)) {
                 isPalindrome = false;
                 break;
             }
+            start++;
+            end--;
         }
 
+        // Capture end time
+        long endTime = System.nanoTime();
+        long duration = endTime - startTime;
+
+        // Output results
         System.out.println("Is Palindrome? : " + isPalindrome);
+        System.out.println("Execution Time : " + duration + " ns");
 
         sc.close();
     }
