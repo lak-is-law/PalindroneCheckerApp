@@ -6,26 +6,26 @@ import java.util.*;
  * MAIN CLASS - UseCasePalindromeApp
  * ======================================
  *
- * Use Case UC11: Object-Oriented Palindrome Service
+ * Use Case UC12: Strategy Pattern for Palindrome Algorithms (Advanced)
  * Description:
  * This class checks validates a palindrome by using a queue and stack
  *
- *
  * At this stage, the application:
- * Create PalindromeChecker class
- * Expose checkPalindrome() method
+ * Define PalindromeStrategy interface
+ * Implement StackStrategy, DequeStrategy
+ * Inject strategy at runtime
  *
  * This use case introduces fundamental comparison logic
  * before using advanced data structures and reduces extra memory usage.
  *
  * @lak-is-law Developer
- * @version 11.0
+ * @version 12.0
  */
 
 public class PalindromeCheckerApp {
 
     /**
-     * Application entry point for UC11.
+     * Application entry point for UC12.
      *
      * This is the first method executed by the JVM
      * when program starts.
@@ -38,17 +38,22 @@ public class PalindromeCheckerApp {
         System.out.print("Input : ");
         String input = sc.nextLine();
 
-        int start = 0;
-        int end = input.length() - 1;
-        boolean isPalindrome = true;
+        // 1. Create a stack to store characters
+        Stack<Character> stack = new Stack<>();
 
-        while (start < end) {
-            if (input.charAt(start) != input.charAt(end)) {
+        // 2. Push each character of the input onto the stack
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+
+        // 3. Compare characters by popping from the stack
+        boolean isPalindrome = true;
+        for (char c : input.toCharArray()) {
+            // Popping gives characters in reverse order
+            if (c != stack.pop()) {
                 isPalindrome = false;
                 break;
             }
-            start++;
-            end--;
         }
 
         System.out.println("Is Palindrome? : " + isPalindrome);
